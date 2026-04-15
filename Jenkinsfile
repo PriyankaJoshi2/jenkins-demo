@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'python:3.11'
-    }
-  }
+  agent any
   stages {
     stage('Checkout') {
       steps {
@@ -13,6 +9,8 @@ pipeline {
     
     stage('Run App') {
       steps {
+        sh 'apt-get update'
+        sh 'apt-get install -y python3'
         sh 'python3 app.py'
       }
     }
